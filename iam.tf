@@ -34,8 +34,6 @@ resource "aws_iam_policy" "external_dns" {
   })
 }
 
-
-
 resource "aws_iam_role" "external_dns" {
   name = "external-dns-role"
   path = "/"
