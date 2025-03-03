@@ -29,8 +29,7 @@ spec:
 
   destination:
     namespace: kube-system
-    server: {{ .Values.spec.destination.server }}
-
+    server: https://kubernetes.default.svc
   syncPolicy:
     automated:
       prune: true
