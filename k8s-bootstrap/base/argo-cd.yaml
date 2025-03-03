@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/Alero-Awani/argocd_k8s_bootstrap.git
     targetRevision: HEAD
-    path: /applications
+    path: applications/master-utilities/templates
 
   destination:
     namespace: argocd
