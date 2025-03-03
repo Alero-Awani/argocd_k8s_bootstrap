@@ -10,8 +10,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: "6.0.1"
+    repoURL: https://bitnami.com/stack/external-dns
+    targetRevision: "0.15.1"
     chart: external-dns
     helm:
       values: |
