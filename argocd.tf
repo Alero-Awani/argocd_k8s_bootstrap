@@ -52,14 +52,14 @@
 #   content  = local.values_dev
 # }
 
-data "kustomization_build" "argocd" {
+data "kustomization_build" "argocd_namespace" {
   path = "./k8s-bootstrap/namespace"
 }
 
 resource "kustomization_resource" "argocd_namespace" {
-  for_each = data.kustomization_build.argocd.ids
-  manifest = data.kustomization_build.argocd.manifests[each.value]
-  depends_on = [module.eks]
+  for_each = data.kustomization_build.argocd_namespace.ids
+  manifest = data.kustomization_build.argocd_namespace.manifests[each.value]
+  depends_on = [null_resource.kubectl]
 
 }
 resource "time_sleep" "wait_180_seconds" {
