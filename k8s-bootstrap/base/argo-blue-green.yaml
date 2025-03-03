@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/argoproj/argo-schema-generator/main/schema/argo_cd_kustomize_schema.json
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: blue-green
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: team
+  source:
+    repoURL: https://github.com/PacktPublishing/ArgoCD-in-Practice.git
+    targetRevision: HEAD
+    path: ch06/simple-blue-green/deployments/argo
+
+  destination:
+    namespace: team-blue-green
+    server: https://kubernetes.default.svc
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
