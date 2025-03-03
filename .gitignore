@@ -2,3 +2,5 @@
 *tfstate*
 plan.out
 variables.tf
+k8s-bootstrap/base/master-utilities.yaml
+applications/master-utilities/values.yaml
