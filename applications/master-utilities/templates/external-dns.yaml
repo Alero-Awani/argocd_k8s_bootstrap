@@ -10,8 +10,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://bitnami.com/stack/external-dns
-    targetRevision: "0.15.1"
+    repoURL: https://kubernetes-sigs.github.io/external-dns/
     chart: external-dns
     helm:
       values: |
