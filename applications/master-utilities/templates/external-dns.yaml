@@ -14,8 +14,6 @@ spec:
     targetRevision: "9251e55"
     path: charts/external-dns
     helm:
-      valueFiles:
-        - ../values.yaml
       values: |
         sources:
         - ingress
