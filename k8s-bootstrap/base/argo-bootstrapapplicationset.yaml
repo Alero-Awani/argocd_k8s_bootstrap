@@ -9,7 +9,7 @@ spec:
     - matrix:
         generators:
           - git:
-              repoURL: https://github.com/PacktPublishing/ArgoCD-in-Practice.git
+              repoURL: https://github.com/Alero-Awani/argocd_k8s_bootstrap.git
               revision: HEAD
               directories:
                 - path: ch05/applications/*
@@ -27,7 +27,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: https://github.com/PacktPublishing/ArgoCD-in-Practice.git
+        repoURL: https://github.com/Alero-Awani/argocd_k8s_bootstrap.git
         targetRevision: HEAD
         path: "{{path}}"
       destination:
