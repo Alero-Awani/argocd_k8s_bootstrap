@@ -27,6 +27,7 @@ spec:
           - {{ .Values.externalDNS.domain }}
         txtOwnerId: {{ .Values.externalDNS.txtOwnerID }}
         txtPrefix: ""
+        txtSuffix: ""
 
   destination:
     namespace: kube-system
