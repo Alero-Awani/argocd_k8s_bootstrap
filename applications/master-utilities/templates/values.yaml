@@ -1,8 +1,0 @@
-spec:
-  destination:
-    server: https://kubernetes.default.svc
-
-externalDNS:
-  iamRole: arn:aws:iam::831926618290:role/external-dns-role
-  domain: alerotech.xyz
-  txtOwnerID: Z0437630EU7PB0MS02EI

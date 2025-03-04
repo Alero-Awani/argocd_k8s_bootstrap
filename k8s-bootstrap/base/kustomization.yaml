@@ -7,7 +7,7 @@ bases:
   - https://raw.githubusercontent.com/argoproj/argo-cd/v2.1.7/manifests/install.yaml
 resources:
   - argo-cd.yaml
-  # - argo-applicationset.yaml
-  # - argo-bootstrapapplicationset.yaml
+  - argo-applicationset.yaml
+  - argo-bootstrapapplicationset.yaml
 patchesStrategicMerge:
   - argocd-cm.yaml

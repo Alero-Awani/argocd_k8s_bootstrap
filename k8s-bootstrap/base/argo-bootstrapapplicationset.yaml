@@ -13,10 +13,10 @@ spec:
               revision: HEAD
               directories:
                 - path: ch05/applications/*
-                - path: ch05/applications/istio-control-plane
-                  exclude: true
-                - path: ch05/applications/argocd-ui
-                  exclude: true
+                # - path: ch05/applications/istio-control-plane
+                #   exclude: true
+                # - path: ch05/applications/argocd-ui
+                #   exclude: true
           - list:
               elements:
                 - cluster: engineering-dev
