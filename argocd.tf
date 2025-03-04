@@ -9,9 +9,9 @@ locals {
   spec:
     project: default
     source:
-      repoURL: https://github.com/PacktPublishing/ArgoCD-in-Practice.git
+      repoURL: https://github.com/Alero-Awani/argocd_k8s_bootstrap.git
       targetRevision: HEAD
-      path: ch05/applications/master-utilities
+      path: applications/master-utilities
       helm:
         values: |
           externalDNS:
