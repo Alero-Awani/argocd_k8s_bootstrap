@@ -52,31 +52,31 @@ resource "local_file" "master_utils_values_yaml" {
   content  = local.values_dev
 }
 
-# data "kustomization_build" "argocd_namespace" {
-#   path = "./k8s-bootstrap/namespace"
-# }
+data "kustomization_build" "argocd_namespace" {
+  path = "./k8s-bootstrap/namespace"
+}
 
-# resource "kustomization_resource" "argocd_namespace" {
-#   for_each = data.kustomization_build.argocd_namespace.ids
-#   manifest = data.kustomization_build.argocd_namespace.manifests[each.value]
-#   depends_on = [null_resource.kubectl]
+resource "kustomization_resource" "argocd_namespace" {
+  for_each = data.kustomization_build.argocd_namespace.ids
+  manifest = data.kustomization_build.argocd_namespace.manifests[each.value]
+  depends_on = [null_resource.kubectl]
 
-# }
-# resource "time_sleep" "wait_60_seconds" {
-#   depends_on      = [kustomization_resource.argocd_namespace]
-#   create_duration = "60s"
-# }
+}
+resource "time_sleep" "wait_60_seconds" {
+  depends_on      = [kustomization_resource.argocd_namespace]
+  create_duration = "60s"
+}
 
-# data "kustomization_build" "argocd" {
-#   path = "./k8s-bootstrap/bootstrap"
-# }
+data "kustomization_build" "argocd" {
+  path = "./k8s-bootstrap/bootstrap"
+}
 
-# resource "kustomization_resource" "argocd" {
-#   for_each = data.kustomization_build.argocd.ids
-#   manifest = data.kustomization_build.argocd.manifests[each.value]
-#   depends_on = [time_sleep.wait_60_seconds]
-#   # depends_on = [
-#   #   local_file.master_utils_values,
-#   #   local_file.master_utils_values_yaml,
-#   # ]
-# }
+resource "kustomization_resource" "argocd" {
+  for_each = data.kustomization_build.argocd.ids
+  manifest = data.kustomization_build.argocd.manifests[each.value]
+  depends_on = [
+    time_sleep.wait_60_seconds,
+    local_file.master_utils_values,
+    local_file.master_utils_values_yaml,
+  ]
+}
