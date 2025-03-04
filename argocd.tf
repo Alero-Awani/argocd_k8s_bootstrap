@@ -75,7 +75,7 @@ resource "kustomization_resource" "argocd" {
   for_each = data.kustomization_build.argocd.ids
   manifest = data.kustomization_build.argocd.manifests[each.value]
   depends_on = [
-    # time_sleep.wait_60_seconds,
+    time_sleep.wait_60_seconds,
     local_file.master_utils_values,
     local_file.master_utils_values_yaml,
   ]

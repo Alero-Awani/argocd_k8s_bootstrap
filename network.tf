@@ -2,7 +2,7 @@ data "aws_availability_zones" "zones" {}
 
 module "vpc" {
   source               = "Terraform-aws-modules/vpc/aws"
-  name                 = "{var.cluster_name}-vpc"
+  name                 = "${var.cluster_name}-vpc"
   cidr                 = var.vpc_cidr
   azs                  = data.aws_availability_zones.zones.names
   private_subnets      = var.private_subnets
