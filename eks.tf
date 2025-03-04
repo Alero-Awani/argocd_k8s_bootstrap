@@ -39,3 +39,8 @@ resource "null_resource" "kubectl" {
     }
     depends_on = [module.eks]
 }
+
+resource "time_sleep" "wait_30_seconds" {
+  depends_on      = [null_resource.kubectl]
+  create_duration = "30s"
+}

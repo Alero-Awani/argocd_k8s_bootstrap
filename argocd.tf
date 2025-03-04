@@ -59,7 +59,7 @@ data "kustomization_build" "argocd_namespace" {
 resource "kustomization_resource" "argocd_namespace" {
   for_each = data.kustomization_build.argocd_namespace.ids
   manifest = data.kustomization_build.argocd_namespace.manifests[each.value]
-  depends_on = [null_resource.kubectl]
+  depends_on = [time_sleep.wait_30_seconds]
 
 }
 resource "time_sleep" "wait_60_seconds" {

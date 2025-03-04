@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: master-utilities
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/PacktPublishing/ArgoCD-in-Practice.git
+    targetRevision: HEAD
+    path: ch05/applications/master-utilities
+    helm:
+      values: |
+        externalDNS:
+          iamRole: arn:aws:iam::831926618290:role/external-dns-role
+          domain: alerotech.xyz
+          txtOwnerID: Z0437630EU7PB0MS02EI
+
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+
+  syncPolicy: 
+    automated:
+      prune: true
+      selfHeal: true
+
