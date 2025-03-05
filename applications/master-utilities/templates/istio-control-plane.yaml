@@ -25,5 +25,5 @@ spec:
   ignoreDifferences:
   - group: '*'
     kind: '*'
-    managedFieldsManagers:
-    - argocd-application-controller
+    # managedFieldsManagers:
+    # - argocd-application-controller
