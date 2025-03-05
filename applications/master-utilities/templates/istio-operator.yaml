@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://github.com/istio/istio.git
     targetRevision: "1.25.0"
-    path: manifests/charts/istio-operator
+    path: manifests/charts/base
     helm:
       parameters:
         - name: "hub"
