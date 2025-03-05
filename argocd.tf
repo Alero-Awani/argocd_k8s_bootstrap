@@ -79,4 +79,7 @@ resource "kustomization_resource" "argocd" {
     local_file.master_utils_values,
     local_file.master_utils_values_yaml,
   ]
+  lifecycle {
+    ignore_changes = [manifest]
+  }
 }
