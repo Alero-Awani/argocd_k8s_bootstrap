@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istiod
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: istio-system
+  project: default
+  source:
+    repoURL: https://github.com/istio/istio.git
+    targetRevision: "1.25.0"
+    path: manifests/charts/istio-control/istio-discovery
+    helm:
+      values: |
+        revision: 1.25.0
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    #automated: {}
+  ignoreDifferences:
+  - group: '*'
+    kind: '*'
+    managedFieldsManagers:
+    - argocd-application-controller

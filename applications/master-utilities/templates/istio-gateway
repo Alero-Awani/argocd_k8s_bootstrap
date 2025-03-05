@@ -1,0 +1,57 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio-ingressgateway
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: istio-ingress
+  project: default
+  source:
+    repoURL: https://github.com/istio/istio.git
+    targetRevision: "1.25.0"
+    path: manifests/charts/gateway
+    helm:
+      values: |
+        # Name allows overriding the release name. Generally this should not be set
+        name: "istio-ingressgateway"
+        # revision declares which revision this gateway is a part of
+        revision: "main"
+        replicaCount: 1
+        service:
+          # Type of service. Set to "None" to disable the service entirely
+          type: LoadBalancer
+          ports:
+          - name: http2
+            port: 80
+            protocol: TCP
+            targetPort: 80
+          - name: https
+            port: 443
+            protocol: TCP
+            targetPort: 443
+          annotations:
+            # AWS NLB Annotation
+            service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+          loadBalancerIP: ""
+          loadBalancerSourceRanges: []
+          externalTrafficPolicy: ""
+        # Pod environment variables
+        env: {}
+        annotations:
+          proxy.istio.io/config: '{ "holdApplicationUntilProxyStarts": true }'
+        # Labels to apply to all resources
+        labels:
+          istio.io/rev: main
+          istio: ingressgateway
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
